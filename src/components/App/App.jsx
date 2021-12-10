@@ -12,15 +12,19 @@ class App extends Component {
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
     ],
     filter: "",
-    name: "",
-    number: "",
+  };
+
+  addContacts = (newContacts) => {
+    // e.preventdefault();
+    this.setState((prevState) => ({
+      contacts: [...prevState.contacts, newContacts],
+    }));
   };
 
   render() {
     return (
       <div>
-        <h1>Phonebook</h1>
-        <InputContacts />
+        <InputContacts onSubmit={this.addContacts} />
         <FindContacts />
         <Contacts contactsUser={this.state.contacts} />
       </div>

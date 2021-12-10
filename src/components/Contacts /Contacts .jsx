@@ -1,16 +1,20 @@
+import s from "./contacts.module.css";
+
 const Contacts = ({ contactsUser }) => {
   return (
     <div>
-      {contactsUser.map(({ name, number }) => (
-        <ul>
-          <li>
+      <ul>
+        {contactsUser.map(({ name, number, id }) => (
+          <li key={id} className={s.item}>
             <p>
               {name}:{number}
             </p>
+            <button type="submit" className={s.btn}>
+              Delete
+            </button>
           </li>
-          <button type="submit">Delete</button>
-        </ul>
-      ))}
+        ))}
+      </ul>
     </div>
   );
 };
