@@ -29,18 +29,26 @@ class App extends Component {
       contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );
   };
+  onDaleteCard = (idDelete) => {
+    this.setState((prevState) => ({
+      contacts: prevState.contacts.filter(({ id }) => id !== idDelete),
+    }));
+  };
 
   render() {
     return (
       <div>
-        <InputContacts onSubmit={this.addContacts} />
+        <InputContacts
+          onSubmit={this.addContacts}
+          mainContacts={this.state.contacts}
+        />
         <FindContacts
           onFilterChange={this.handleFilterChange}
           value={this.state.filter}
         />
         <Contacts
           items={this.getFilterContacts()}
-          contactsUser={this.state.contacts}
+          onDaleteCard={this.onDaleteCard}
         />
       </div>
     );

@@ -1,7 +1,7 @@
 import s from "./contacts.module.css";
+import { PropTypes } from "prop-types";
 
-const Contacts = ({ contactsUser, items }) => {
-  console.log("items", items);
+const Contacts = ({ items, onDaleteCard }) => {
   return (
     <div>
       <ul>
@@ -10,7 +10,11 @@ const Contacts = ({ contactsUser, items }) => {
             <p>
               {name}:{number}
             </p>
-            <button type="submit" className={s.btn}>
+            <button
+              type="submit"
+              onClick={() => onDaleteCard(id)}
+              className={s.btn}
+            >
               Delete
             </button>
           </li>
@@ -20,4 +24,8 @@ const Contacts = ({ contactsUser, items }) => {
   );
 };
 
+Contacts.propTypes = {
+  items: PropTypes.array,
+  onDaleteCard: PropTypes.func,
+};
 export default Contacts;

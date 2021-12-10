@@ -19,8 +19,10 @@ class InputContacts extends Component {
   };
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.onSubmit({ ...this.state });
+    e.preventDefault("e.target.value", e.target.value);
+    this.props.mainContacts.some(({ name }) => name === this.state.name)
+      ? alert(`${this.state.name} is alredy in contact`)
+      : this.props.onSubmit({ ...this.state });
     this.reset();
   };
 

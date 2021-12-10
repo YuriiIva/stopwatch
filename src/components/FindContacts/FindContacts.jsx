@@ -1,4 +1,5 @@
 import s from "./FindContacts.module.css";
+import { PropTypes } from "prop-types";
 
 const FindContacts = ({ onFilterChange, value }) => {
   return (
@@ -18,6 +19,11 @@ const FindContacts = ({ onFilterChange, value }) => {
       </form>
     </div>
   );
+};
+
+FindContacts.propTypes = {
+  onFilterChange: PropTypes.func,
+  value: PropTypes.string,
 };
 
 export default FindContacts;
