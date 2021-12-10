@@ -7,4 +7,6 @@
   width: 60px;
   height: 30px;
   border-radius: 10%;
+  background-color: rgb(151, 106, 79);
+  box-shadow: 10px 0 10px -5px rgba(0, 0, 0, 0.3);
 }
