@@ -15,18 +15,33 @@ class App extends Component {
   };
 
   addContacts = (newContacts) => {
-    // e.preventdefault();
     this.setState((prevState) => ({
       contacts: [...prevState.contacts, newContacts],
     }));
+  };
+
+  handleFilterChange = (value) => {
+    this.setState({ filter: value });
+  };
+
+  getFilterContacts = () => {
+    return this.state.contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
   };
 
   render() {
     return (
       <div>
         <InputContacts onSubmit={this.addContacts} />
-        <FindContacts />
-        <Contacts contactsUser={this.state.contacts} />
+        <FindContacts
+          onFilterChange={this.handleFilterChange}
+          value={this.state.filter}
+        />
+        <Contacts
+          items={this.getFilterContacts()}
+          contactsUser={this.state.contacts}
+        />
       </div>
     );
   }

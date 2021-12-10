@@ -1,10 +1,11 @@
 import s from "./contacts.module.css";
 
-const Contacts = ({ contactsUser }) => {
+const Contacts = ({ contactsUser, items }) => {
+  console.log("items", items);
   return (
     <div>
       <ul>
-        {contactsUser.map(({ name, number, id }) => (
+        {items.map(({ name, number, id }) => (
           <li key={id} className={s.item}>
             <p>
               {name}:{number}
