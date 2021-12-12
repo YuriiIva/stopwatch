@@ -3,6 +3,10 @@ import Contacts from "../Contacts /Contacts ";
 import FindContacts from "../FindContacts/FindContacts";
 import InputContacts from "../InputContacts/InputContacts";
 
+import { get, save, remove } from "../../services/localStorage";
+
+const CONTACTS_KEY = "contacts";
+
 class App extends Component {
   state = {
     contacts: [
@@ -13,6 +17,20 @@ class App extends Component {
     ],
     filter: "",
   };
+
+  componentDidMount = () => {
+    const sevedContacts = get(CONTACTS_KEY);
+    if (sevedContacts) {
+      this.setState({ contacts: sevedContacts });
+    }
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    const { contacts } = this.state;
+    if (prevState.contacts !== contacts) {
+      save(CONTACTS_KEY, contacts);
+    }
+  }
 
   addContacts = (newContacts) => {
     this.setState((prevState) => ({
