@@ -13,7 +13,7 @@ const FindContacts = ({ onFilterChange, value }) => {
             type="text"
             className={s.input}
             value={value}
-            onChange={(e) => onFilterChange(e.target.value)}
+            onChange={onFilterChange}
           />
         </label>
       </form>
