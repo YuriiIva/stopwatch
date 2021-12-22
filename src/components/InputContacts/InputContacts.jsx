@@ -1,15 +1,16 @@
 import s from "./InputContacts.module.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import { nanoid } from "nanoid";
 
-const InputContacts = ({ mainContacts, onSubmit }) => {
+const InputContacts = ({ onSubmit }) => {
+  const contacts = useSelector((state) => state.contacts.items);
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [id, setId] = useState("");
 
   const handleChange = (e) => {
-    console.log(`e.target`, e.target.name);
     switch (e.target.name) {
       case "name":
         setName(e.target.value);
@@ -21,14 +22,16 @@ const InputContacts = ({ mainContacts, onSubmit }) => {
       default:
         return;
     }
-    setId(nanoid(5));
+    // setId(nanoid(5));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mainContacts.some(({ newName }) => newName === e.target.value)
-      ? alert(`${name} is alredy in contact`)
-      : onSubmit({ name, number, id });
+    if (contacts.some((contact) => name === contact.name)) {
+      alert(`${name} is alredy in contact`);
+      return;
+    }
+    onSubmit({ name, number, id });
     reset();
   };
 

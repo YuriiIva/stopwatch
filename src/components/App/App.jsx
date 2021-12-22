@@ -1,4 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addContactsR,
+  deleteContacts,
+} from "../../redux/contacts/contacrsActions";
 import Contacts from "../Contacts /Contacts ";
 import FindContacts from "../FindContacts/FindContacts";
 import InputContacts from "../InputContacts/InputContacts";
@@ -8,25 +13,17 @@ import { get, save } from "../../services/localStorage";
 const CONTACTS_KEY = "contacts";
 
 const App = () => {
-  const [contacts, setContacts] = useState([]);
-  const [filter, setFilter] = useState("");
-
-  useEffect(() => {
-    const sevedContacts = get(CONTACTS_KEY);
-    if (sevedContacts) {
-      setContacts(sevedContacts);
-    }
-  }, []);
+  const contacts = useSelector((state) => state.contacts.items);
+  const filter = useSelector((state) => state.contacts.filter);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     save(CONTACTS_KEY, contacts);
   }, [contacts]);
 
   const addContacts = (newContacts) => {
-    setContacts((prevState) => [...prevState, newContacts]);
+    dispatch(addContactsR(newContacts));
   };
-
-  const handleFilterChange = (e) => setFilter(e.target.value);
 
   const getFilterContacts = () => {
     return contacts.filter((contact) =>
@@ -35,16 +32,13 @@ const App = () => {
   };
 
   const onDaleteCard = (idDelete) => {
-    console.log(idDelete);
-    setContacts((prevContacts) =>
-      prevContacts.filter(({ id }) => id !== idDelete)
-    );
+    dispatch(deleteContacts(idDelete));
   };
 
   return (
     <div>
-      <InputContacts onSubmit={addContacts} mainContacts={contacts} />
-      <FindContacts onFilterChange={handleFilterChange} value={filter} />
+      <InputContacts onSubmit={addContacts} />
+      <FindContacts />
       <Contacts items={getFilterContacts(filter)} onDaleteCard={onDaleteCard} />
     </div>
   );
