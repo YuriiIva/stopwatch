@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addContactsR,
@@ -8,18 +7,10 @@ import Contacts from "../Contacts /Contacts ";
 import FindContacts from "../FindContacts/FindContacts";
 import InputContacts from "../InputContacts/InputContacts";
 
-import { get, save } from "../../services/localStorage";
-
-const CONTACTS_KEY = "contacts";
-
 const App = () => {
   const contacts = useSelector((state) => state.contacts.items);
   const filter = useSelector((state) => state.contacts.filter);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    save(CONTACTS_KEY, contacts);
-  }, [contacts]);
 
   const addContacts = (newContacts) => {
     dispatch(addContactsR(newContacts));

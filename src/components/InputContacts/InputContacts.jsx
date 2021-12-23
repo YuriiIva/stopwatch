@@ -1,6 +1,7 @@
 import s from "./InputContacts.module.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { GiBookCover } from "react-icons/gi";
 
 import { nanoid } from "nanoid";
 
@@ -42,7 +43,10 @@ const InputContacts = ({ onSubmit }) => {
   };
   return (
     <div>
-      <h1 className={s.title}>Phonebook</h1>
+      <h1 className={s.title}>
+        <GiBookCover />
+        Phonebook
+      </h1>
       <form className={s.form} onSubmit={handleSubmit}>
         <label htmlFor="" className={s.label}>
           name
