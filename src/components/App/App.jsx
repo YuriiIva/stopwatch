@@ -27,7 +27,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="main">
       <InputContacts onSubmit={addContacts} />
       <FindContacts />
       <Contacts items={getFilterContacts(filter)} onDaleteCard={onDaleteCard} />
