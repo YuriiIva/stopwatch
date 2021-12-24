@@ -1,7 +1,7 @@
 import s from "./FindContacts.module.css";
 // import { PropTypes } from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import { changeFilter } from "../../redux/contacts/contacrsActions";
+import { changeFilter } from "redux/contacts/contactsSlice";
 
 const FindContacts = () => {
   const filter = useSelector((state) => state.contacts.filter);
@@ -25,10 +25,5 @@ const FindContacts = () => {
     </div>
   );
 };
-
-// FindContacts.propTypes = {
-//   onFilterChange: PropTypes.func,
-//   value: PropTypes.string,
-// };
 
 export default FindContacts;

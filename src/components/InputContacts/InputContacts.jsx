@@ -1,30 +1,23 @@
 import s from "./InputContacts.module.css";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { GiBookCover } from "react-icons/gi";
+
+import { contactsOperations } from "redux/contacts";
 
 import { nanoid } from "nanoid";
 
-const InputContacts = ({ onSubmit }) => {
-  const contacts = useSelector((state) => state.contacts.items);
+const InputContacts = () => {
+  const contacts = useSelector((state) => state.contacts.data.items);
   const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [phone, setPhone] = useState("");
   const [id, setId] = useState("");
+  const [newContact, setNewContact] = useState({});
+  const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    switch (e.target.name) {
-      case "name":
-        setName(e.target.value);
-        break;
-      case "number":
-        setNumber(e.target.value);
-        break;
-
-      default:
-        return;
-    }
-    // setId(nanoid(5));
-  };
+  useEffect(() => {
+    dispatch(contactsOperations.addContact(newContact));
+  }, [dispatch, newContact]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,13 +25,13 @@ const InputContacts = ({ onSubmit }) => {
       alert(`${name} is alredy in contact`);
       return;
     }
-    onSubmit({ name, number, id });
+    setNewContact({ name, phone });
     reset();
   };
 
   const reset = () => {
     setName("");
-    setNumber("");
+    setPhone("");
     setId("");
   };
   return (
@@ -56,19 +49,19 @@ const InputContacts = ({ onSubmit }) => {
             value={name}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            onChange={handleChange}
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </label>
         <label htmlFor="" className={s.label}>
-          number
+          phone
           <input
             type="tel"
-            name="number"
-            value={number}
+            name="phone"
+            value={phone}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            onChange={handleChange}
+            onChange={(e) => setPhone(e.target.value)}
             required
           />
         </label>

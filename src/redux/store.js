@@ -12,7 +12,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
-import contactsReducer from "./contacts/contactsReducer";
+import contactsReducer from "./contacts/contactsSlice";
 
 const persistContactsConfig = {
   key: "items",

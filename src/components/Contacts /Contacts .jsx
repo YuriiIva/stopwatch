@@ -5,10 +5,10 @@ const Contacts = ({ items, onDaleteCard }) => {
   return (
     <div>
       <ul>
-        {items.map(({ name, number, id }) => (
+        {items.map(({ name, phone, id }) => (
           <li key={id} className={s.item}>
             <p>
-              {name}:{number}
+              {name}:{phone}
             </p>
             <button
               type="submit"

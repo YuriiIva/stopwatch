@@ -1,20 +1,23 @@
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addContactsR,
-  deleteContacts,
-} from "../../redux/contacts/contacrsActions";
+
 import Contacts from "../Contacts /Contacts ";
 import FindContacts from "../FindContacts/FindContacts";
 import InputContacts from "../InputContacts/InputContacts";
+import { useEffect } from "react";
+import { contactsOperations } from "redux/contacts";
+
+const { getContacts, deleteContacts } = contactsOperations;
 
 const App = () => {
-  const contacts = useSelector((state) => state.contacts.items);
+  const contacts = useSelector((state) => state.contacts.data.items);
   const filter = useSelector((state) => state.contacts.filter);
+  // const error = useSelector((state) => state.contacts.data.error);
+  // const loading = useSelector((state) => state.contacts.data.loading);
   const dispatch = useDispatch();
 
-  const addContacts = (newContacts) => {
-    dispatch(addContactsR(newContacts));
-  };
+  useEffect(() => {
+    dispatch(getContacts());
+  }, [dispatch]);
 
   const getFilterContacts = () => {
     return contacts.filter((contact) =>
@@ -28,7 +31,7 @@ const App = () => {
 
   return (
     <div className="main">
-      <InputContacts onSubmit={addContacts} />
+      <InputContacts />
       <FindContacts />
       <Contacts items={getFilterContacts(filter)} onDaleteCard={onDaleteCard} />
     </div>
