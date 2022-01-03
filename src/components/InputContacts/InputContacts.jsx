@@ -5,8 +5,6 @@ import { GiBookCover } from "react-icons/gi";
 
 import { contactsOperations } from "redux/contacts";
 
-import { nanoid } from "nanoid";
-
 const InputContacts = () => {
   const contacts = useSelector((state) => state.contacts.data.items);
   const [name, setName] = useState("");
