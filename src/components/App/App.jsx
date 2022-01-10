@@ -1,40 +1,42 @@
-import { useSelector, useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
+import { Switch, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import Navigation from "components/Header/Navigation";
+import UseMenu from "components/Header/UseMenu";
 
-import Contacts from "../Contacts /Contacts ";
-import FindContacts from "../FindContacts/FindContacts";
-import InputContacts from "../InputContacts/InputContacts";
-import { useEffect } from "react";
-import { contactsOperations } from "redux/contacts";
+import Login from "components/Login/Login";
+import Register from "components/Register/Register";
+import Home from "components/Home/Home";
+import PhoneBook from "components/PhoneBook/PhoneBook";
+import AuthNav from "components/Header/AuthNav";
 
-const { getContacts, deleteContacts } = contactsOperations;
+// const { getContacts, deleteContacts } = contactsOperations;
 
 const App = () => {
-  const contacts = useSelector((state) => state.contacts.data.items);
-  const filter = useSelector((state) => state.contacts.filter);
-  // const error = useSelector((state) => state.contacts.data.error);
-  // const loading = useSelector((state) => state.contacts.data.loading);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getContacts());
-  }, [dispatch]);
-
-  const getFilterContacts = () => {
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  };
-
-  const onDaleteCard = (idDelete) => {
-    dispatch(deleteContacts(idDelete));
-  };
+  const isloginIn = false;
 
   return (
-    <div className="main">
-      <InputContacts />
-      <FindContacts />
-      <Contacts items={getFilterContacts(filter)} onDaleteCard={onDaleteCard} />
-    </div>
+    <>
+      <header className="App-header">
+        <Navigation />
+        {isloginIn ? <UseMenu /> : <AuthNav />}
+      </header>
+
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/contacts">
+          <PhoneBook />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+      </Switch>
+    </>
   );
 };
 

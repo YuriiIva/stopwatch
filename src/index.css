@@ -22,3 +22,25 @@ code {
   margin-top: 10px;
   border-radius: 10%;
 }
+
+.active {
+  color: crimson;
+}
+
+.App-header {
+  padding: 0 20px;
+  background-color: #282c34;
+  min-height: 60px;
+  display: flex;
+  justify-content: space-between;
+
+  gap: 20px;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.home {
+  margin-right: 10px;
+}
+.login {
+  margin-left: 10px;
+}

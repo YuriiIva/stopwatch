@@ -1,4 +1,5 @@
 const BASE_URL = "https://61c4aa46f1af4a0017d9972f.mockapi.io";
+// const BASE_URL = "https://connections-api.herokuapp.com/";
 
 const fetchData = async (path, options = {}) => {
   const res = await fetch(`${BASE_URL}/${path}`, options);
