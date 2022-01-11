@@ -9,11 +9,17 @@ import Register from "components/Register/Register";
 import Home from "components/Home/Home";
 import PhoneBook from "components/PhoneBook/PhoneBook";
 import AuthNav from "components/Header/AuthNav";
+import { useSelector, useDispatch } from "react-redux";
+import authSelectors from "../../redux/auth/authSelectors";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // const { getContacts, deleteContacts } = contactsOperations;
 
 const App = () => {
-  const isloginIn = false;
+  const isloginIn = useSelector(authSelectors.getIsLoggedIn);
+  console.log(`isloginIn`, isloginIn);
 
   return (
     <>
@@ -36,6 +42,7 @@ const App = () => {
           <Login />
         </Route>
       </Switch>
+      <ToastContainer position="top-right" autoClose={5000} />
     </>
   );
 };

@@ -13,12 +13,18 @@ import {
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
 import contactsReducer from "./contacts/contactsSlice";
+import authSliceReducer from "./auth/authSlice";
 
 const persistContactsConfig = {
   key: "items",
   storage,
   whitelist: ["items"],
   blacklist: ["filter"],
+};
+const persistAuthConfig = {
+  key: "token",
+  storage,
+  whitelist: ["token"],
 };
 
 const logger = createLogger({
@@ -28,6 +34,7 @@ const logger = createLogger({
 
 const store = configureStore({
   reducer: {
+    auth: persistReducer(persistAuthConfig, authSliceReducer),
     contacts: persistReducer(persistContactsConfig, contactsReducer),
   },
   middleware: (getDefaultMiddleware) =>

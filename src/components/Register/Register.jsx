@@ -1,32 +1,40 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import { authOperation } from "redux/auth";
+
 import s from "./Register.module.css";
 
 const Register = () => {
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleChange = (e) => {
-    switch (e.target.name) {
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
       case "name":
-        return setName(e.target.value);
+        return setName(value);
       case "email":
-        return setEmail(e.target.value);
+        return setEmail(value);
       case "password":
-        return setPassword(e.target.value);
+        return setPassword(value);
       default:
-        break;
+        return;
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(authOperation.register({ name, email, password }));
+    setName("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
     <div>
-      <form action="" className={s.form}>
+      <form action="" className={s.form} onSubmit={handleSubmit}>
         <label htmlFor="">
           name
           <input
@@ -35,7 +43,6 @@ const Register = () => {
             value={name}
             required
             placeholder="name"
-            required
             onChange={handleChange}
             className={s.input}
           />
@@ -43,12 +50,11 @@ const Register = () => {
         <label htmlFor="">
           email
           <input
-            type="text"
+            type="email"
             name="email"
             value={email}
             required
             placeholder="email"
-            required
             onChange={handleChange}
             className={s.input}
           />
@@ -56,7 +62,7 @@ const Register = () => {
         <label htmlFor="">
           password
           <input
-            type="text"
+            type="password"
             name="password"
             value={password}
             required
@@ -66,7 +72,7 @@ const Register = () => {
             className={s.input}
           />
         </label>
-        <button type="submit" onSubmit={handleSubmit} className={s.btn}>
+        <button type="submit" className={s.btn}>
           Register
         </button>
       </form>
