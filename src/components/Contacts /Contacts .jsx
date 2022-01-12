@@ -9,10 +9,10 @@ const Contacts = ({ items, onDaleteCard }) => {
     <div>
       <ul>
         {!!items.length &&
-          items.map(({ name, phone, id }) => (
+          items.map(({ name, number, id }) => (
             <li key={id} className={s.item}>
               <p>
-                {name}:{phone}
+                {name}:{number}
               </p>
               <button
                 type="submit"

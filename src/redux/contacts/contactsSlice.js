@@ -47,22 +47,6 @@ const contactsSlice = createSlice({
         state.data.error = payload;
       })
 
-      // .addCase(editContacts.pending, (state) => {
-      //   state.data.loading = true;
-      //   state.data.error = null;
-      // })
-      // .addCase(editContacts.fulfilled, (state, { payload }) => {
-      //   state.data.loading = false;
-      //   const indx = state.data.items.findIndex(
-      //     (item) => item.id === payload.id
-      //   );
-      //   state.data.items[indx] = payload;
-      // })
-      // .addCase(editContacts.rejected, (state, { payload }) => {
-      //   state.data.loading = false;
-      //   state.data.error = payload;
-      // })
-
       .addCase(deleteContacts.pending, (state) => {
         state.data.loading = true;
         state.data.error = null;

@@ -9,7 +9,7 @@ const InputContacts = () => {
   const contacts = useSelector((state) => state.contacts.data.items);
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
-  const [id, setId] = useState("");
+  // const [id, setId] = useState("");
   const [newContact, setNewContact] = useState(null);
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ const InputContacts = () => {
   const reset = () => {
     setName("");
     setNumber("");
-    setId("");
+    // setId("");
   };
   return (
     <div>

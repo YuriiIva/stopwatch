@@ -1,6 +1,5 @@
-import React from "react";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -36,6 +35,8 @@ const Login = () => {
     setPassword("");
   };
 
+  const isBtnDisabled = !email || !password;
+
   return (
     <div>
       <form action="" className={s.form} onSubmit={handleSubmit}>
@@ -59,12 +60,11 @@ const Login = () => {
             value={password}
             required
             placeholder="password "
-            required
             onChange={handleChange}
             className={s.input}
           />
         </label>
-        <button type="submit" className={s.btn}>
+        <button type="submit" className={s.btn} disabled={isBtnDisabled}>
           Login
         </button>
       </form>

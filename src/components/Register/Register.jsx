@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { authOperation } from "redux/auth";
 
@@ -31,6 +31,8 @@ const Register = () => {
     setEmail("");
     setPassword("");
   };
+
+  const isBtnDisabled = !name || !email || !password;
 
   return (
     <div>
@@ -72,7 +74,7 @@ const Register = () => {
             className={s.input}
           />
         </label>
-        <button type="submit" className={s.btn}>
+        <button type="submit" className={s.btn} disabled={isBtnDisabled}>
           Register
         </button>
       </form>
