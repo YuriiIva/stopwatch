@@ -8,12 +8,14 @@ import { contactsOperations } from "redux/contacts";
 const InputContacts = () => {
   const contacts = useSelector((state) => state.contacts.data.items);
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [number, setNumber] = useState("");
   const [id, setId] = useState("");
-  const [newContact, setNewContact] = useState({});
+  const [newContact, setNewContact] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!newContact) return;
+
     dispatch(contactsOperations.addContact(newContact));
   }, [dispatch, newContact]);
 
@@ -23,13 +25,13 @@ const InputContacts = () => {
       alert(`${name} is alredy in contact`);
       return;
     }
-    setNewContact({ name, phone });
+    setNewContact({ name, number });
     reset();
   };
 
   const reset = () => {
     setName("");
-    setPhone("");
+    setNumber("");
     setId("");
   };
   return (
@@ -55,11 +57,11 @@ const InputContacts = () => {
           phone
           <input
             type="tel"
-            name="phone"
-            value={phone}
+            name="number"
+            value={number}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => setNumber(e.target.value)}
             required
           />
         </label>

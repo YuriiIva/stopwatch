@@ -22,7 +22,7 @@ const persistContactsConfig = {
   blacklist: ["filter"],
 };
 const persistAuthConfig = {
-  key: "token",
+  key: "auth",
   storage,
   whitelist: ["token"],
 };

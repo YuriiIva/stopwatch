@@ -1,16 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  getContacts,
-  addContact,
-  editContacts,
-  deleteContacts,
-} from "./contactsOperations";
+import { getContacts, addContact, deleteContacts } from "./contactsOperations";
 
 const initialState = {
   data: {
     items: [],
     loading: false,
     error: null,
+    token: null,
   },
   filter: "",
 };
@@ -51,21 +47,21 @@ const contactsSlice = createSlice({
         state.data.error = payload;
       })
 
-      .addCase(editContacts.pending, (state) => {
-        state.data.loading = true;
-        state.data.error = null;
-      })
-      .addCase(editContacts.fulfilled, (state, { payload }) => {
-        state.data.loading = false;
-        const indx = state.data.items.findIndex(
-          (item) => item.id === payload.id
-        );
-        state.data.items[indx] = payload;
-      })
-      .addCase(editContacts.rejected, (state, { payload }) => {
-        state.data.loading = false;
-        state.data.error = payload;
-      })
+      // .addCase(editContacts.pending, (state) => {
+      //   state.data.loading = true;
+      //   state.data.error = null;
+      // })
+      // .addCase(editContacts.fulfilled, (state, { payload }) => {
+      //   state.data.loading = false;
+      //   const indx = state.data.items.findIndex(
+      //     (item) => item.id === payload.id
+      //   );
+      //   state.data.items[indx] = payload;
+      // })
+      // .addCase(editContacts.rejected, (state, { payload }) => {
+      //   state.data.loading = false;
+      //   state.data.error = payload;
+      // })
 
       .addCase(deleteContacts.pending, (state) => {
         state.data.loading = true;
@@ -73,9 +69,7 @@ const contactsSlice = createSlice({
       })
       .addCase(deleteContacts.fulfilled, (state, { payload }) => {
         state.data.loading = false;
-        const indx = state.data.items.findIndex(
-          (item) => item.id === payload.id
-        );
+        const indx = state.data.items.findIndex((item) => item.id === payload);
         state.data.items.splice(indx, 1);
       })
       .addCase(deleteContacts.rejected, (state, { payload }) => {

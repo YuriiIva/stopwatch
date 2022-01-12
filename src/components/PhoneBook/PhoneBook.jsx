@@ -14,10 +14,12 @@ const PhoneBook = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // if()
     dispatch(getContacts());
   }, [dispatch]);
 
   const getFilterContacts = () => {
+    if (!contacts.length) return [];
     return contacts.filter((contact) =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
