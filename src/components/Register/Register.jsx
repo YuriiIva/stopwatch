@@ -69,7 +69,6 @@ const Register = () => {
             value={password}
             required
             placeholder="password "
-            required
             onChange={handleChange}
             className={s.input}
           />
