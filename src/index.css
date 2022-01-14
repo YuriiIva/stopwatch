@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(236, 255, 127);
+  background-color: rgb(6, 171, 177);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -16,7 +16,7 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: beige;
+  background-color: rgb(13, 175, 108);
   width: 600px;
   margin: 0 auto;
   margin-top: 10px;

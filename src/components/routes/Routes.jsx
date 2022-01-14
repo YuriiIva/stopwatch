@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import RequireAuthRoute from "./RequireAuthRoute";
+import RequireNotAuthRoute from "./RequireNotAuthRoute";
 
 import Navigation from "components/Header/Navigation";
 import UseMenu from "components/Header/UseMenu";
@@ -38,19 +40,31 @@ const Routes = () => {
 
         <Route
           path="/contacts"
-          render={() => (isLoggedIn ? <PhoneBook /> : <Redirect to="/login" />)}
+          render={() => (
+            <RequireAuthRoute redirectTo="/login">
+              <PhoneBook />
+            </RequireAuthRoute>
+          )}
         />
 
         {/* No auth */}
 
         <Route
           path="/register"
-          render={() => (!isLoggedIn ? <Register /> : <Redirect to="/" />)}
+          render={() => (
+            <RequireNotAuthRoute redirectTo="/">
+              <Register />
+            </RequireNotAuthRoute>
+          )}
         />
 
         <Route
           path="/login"
-          render={() => (!isLoggedIn ? <Login /> : <Redirect to="/" />)}
+          render={() => (
+            <RequireNotAuthRoute redirectTo="/">
+              <Login />
+            </RequireNotAuthRoute>
+          )}
         />
 
         <Route render={() => <NotFound />} />

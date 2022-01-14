@@ -21,7 +21,7 @@ const addContact = createAsyncThunk(
   async (newContact, thunkAPI) => {
     try {
       const { data } = await api.saveItem(API_ENDPOINT, newContact);
-      console.log(`data in cont Operat`, data);
+
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue("Something wrong :(");
