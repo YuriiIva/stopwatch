@@ -7,7 +7,7 @@ const Contacts = ({ items, onDaleteCard }) => {
   // }
   return (
     <div>
-      <ul>
+      <ul className={s.list}>
         {!!items.length &&
           items.map(({ name, number, id }) => (
             <li key={id} className={s.item}>

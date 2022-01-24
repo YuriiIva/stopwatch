@@ -18,3 +18,17 @@
   background-color: aqua;
   color: rgb(236, 10, 10);
 }
+.list {
+  height: 300px;
+  overflow-y: scroll;
+  width: 400px;
+}
+.list::-webkit-scrollbar {
+  width: 5px;
+  height: 7px;
+  background-color: chartreuse;
+}
+.list::-webkit-scrollbar-thumb {
+  background-color: rgb(14, 27, 100);
+  border-radius: 50%;
+}

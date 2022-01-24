@@ -1,4 +1,5 @@
-body {
+body,
+html {
   background-color: rgb(6, 171, 177);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -6,6 +7,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-color: tomato purple;
+  scrollbar-width: thin;
 }
 
 code {
