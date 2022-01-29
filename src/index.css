@@ -2,48 +2,42 @@ body,
 html {
   background-color: rgb(6, 171, 177);
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  scrollbar-color: tomato purple;
-  scrollbar-width: thin;
+  font-family: "Segoe UI", "Roboto";
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-.main {
+.stopwatch {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(13, 175, 108);
-  width: 600px;
-  margin: 0 auto;
-  margin-top: 10px;
+  justify-content: center;
+  margin-top: 30px;
+}
+.tabl {
+  padding-top: 20px;
+  margin-bottom: 15px;
+  height: 50px;
+  width: 150px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 700;
+  border: 2px solid rgb(221, 255, 71);
   border-radius: 10%;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.4);
+  background-color: tomato;
 }
+.btn {
+  width: 75px;
+  height: 30px;
 
-.active {
-  color: crimson;
-}
-
-.App-header {
-  padding: 0 20px;
-  background-color: #282c34;
-  min-height: 60px;
-  display: flex;
-  justify-content: space-between;
-
-  gap: 20px;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-.home {
+  padding: 5px;
   margin-right: 10px;
+  margin-bottom: 5px;
+
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 5px 5px 5px 2px rgba(34, 60, 80, 0.4);
 }
-.login {
-  margin-left: 10px;
+.btn:hover {
+  background-color: teal;
+  color: antiquewhite;
+  box-shadow: 1px 1px 1px 2px rgba(34, 60, 80, 0.4);
 }
