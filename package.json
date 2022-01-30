@@ -2,6 +2,7 @@
   "name": "stopwatch",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://YuriiIva.github.io/stopwatch",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -23,7 +24,7 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "predeploy": "npm run build",
-    "deploy": "netlify deploy -p"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
