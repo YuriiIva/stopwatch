@@ -1,4 +1,9 @@
+import Btn from "components/Btn/Btn";
+import Display from "components/Display/Display";
 import { useState, useEffect } from "react";
+
+import { interval, Subject } from "rxjs";
+import { takeUntil, delay } from "rxjs/operators";
 
 const App = () => {
   const [start, setStart] = useState(false);
@@ -7,50 +12,69 @@ const App = () => {
   const [status, setStatus] = useState(0);
 
   useEffect(() => {
-    let interval = null;
+    const unsubscribe = new Subject();
+    console.log(`unsubscribe`, unsubscribe);
 
-    if (start) {
-      setStatus(0);
+    interval(1000)
+      .pipe(takeUntil(unsubscribe))
+      .subscribe(() => {
+        if (start) {
+          setTime((prevTime) => prevTime + 1000);
+        }
+      });
+    return () => {
+      unsubscribe.next();
+      unsubscribe.complete();
+    };
 
-      interval = setInterval(() => {
-        setTime((prevTime) => prevTime + 1000);
-      }, 1000);
-    } else {
-      clearInterval(interval);
-      setStatus(1);
-    }
-    return () => clearInterval(interval);
+    // let interval = null;
+
+    // if (start) {
+    //   setStatus(0);
+
+    //   interval = setInterval(() => {
+    //     setTime((prevTime) => prevTime + 1000);
+    //   }, 1000);
+    // } else {
+    //   clearInterval(interval);
+    //   setStatus(1);
+    // }
+    // return () => clearInterval(interval);
   }, [start]);
 
-  const toggleBtn = () => {
+  const handleStart = () => {
     start === true ? setStart(false) : setStart(true);
-    // setTime(0);
+    setStatus(1);
   };
 
-  const reset = () => {
+  const handleResume = () => {
+    handleStart();
+  };
+
+  const handleStop = () => {
+    if (time !== 0) {
+      setStart(false);
+      setTime(0);
+    }
+    setStatus(0);
+  };
+
+  const handleReset = () => {
     setTime(0);
+    setStart(false);
     setStatus(0);
   };
 
   return (
     <div className="stopwatch">
-      <div className="tabl">
-        <span>{("0" + Math.floor((time / 3600000) % 60)).slice(-2)}:</span>
-        <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
-        <span>{("0" + ((time / 1000) % 60)).slice(-2)}</span>
-      </div>
-      <div>
-        <button type="button" onClick={toggleBtn} className="btn">
-          {status === 1 ? "START" : "STOP"}
-        </button>
-
-        <button type="button" onClick={() => setStart(false)} className="btn">
-          Wait
-        </button>
-      </div>
-      <button type="button" onClick={reset} className="btn">
-        Reset
-      </button>
+      <Display time={time} />
+      <Btn
+        status={status}
+        handleStart={handleStart}
+        handleReset={handleReset}
+        handleResume={handleResume}
+        handleStop={handleStop}
+      />
     </div>
   );
 };
