@@ -1,5 +1,4 @@
 import React from "react";
-import { takeUntil, delay } from "rxjs/operators";
 
 const Btn = ({
   status,
@@ -21,12 +20,7 @@ const Btn = ({
             <button type="button" onClick={handleStop} className="btn">
               STOP
             </button>
-            <button
-              type="button"
-              // onClick={() => delay(300).handleResume}
-              onClick={() => delay(300).handleResume}
-              className="btn"
-            >
+            <button type="button" className="btn" onClick={handleResume}>
               Wait
             </button>
             <button type="button" onClick={handleReset} className="btn">

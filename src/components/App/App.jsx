@@ -3,7 +3,7 @@ import Display from "components/Display/Display";
 import { useState, useEffect } from "react";
 
 import { interval, Subject } from "rxjs";
-import { takeUntil, delay } from "rxjs/operators";
+import { takeUntil } from "rxjs/operators";
 
 const App = () => {
   const [start, setStart] = useState(false);
@@ -13,7 +13,6 @@ const App = () => {
 
   useEffect(() => {
     const unsubscribe = new Subject();
-    console.log(`unsubscribe`, unsubscribe);
 
     interval(1000)
       .pipe(takeUntil(unsubscribe))
@@ -26,20 +25,6 @@ const App = () => {
       unsubscribe.next();
       unsubscribe.complete();
     };
-
-    // let interval = null;
-
-    // if (start) {
-    //   setStatus(0);
-
-    //   interval = setInterval(() => {
-    //     setTime((prevTime) => prevTime + 1000);
-    //   }, 1000);
-    // } else {
-    //   clearInterval(interval);
-    //   setStatus(1);
-    // }
-    // return () => clearInterval(interval);
   }, [start]);
 
   const handleStart = () => {
@@ -48,7 +33,9 @@ const App = () => {
   };
 
   const handleResume = () => {
-    handleStart();
+    setTimeout(() => {
+      handleStart();
+    }, 300);
   };
 
   const handleStop = () => {
