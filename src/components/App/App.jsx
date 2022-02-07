@@ -9,10 +9,9 @@ const App = () => {
   const [start, setStart] = useState(false);
   const [time, setTime] = useState(0);
 
-  const [status, setStatus] = useState(0);
-
   useEffect(() => {
     const unsubscribe = new Subject();
+    console.log(`unsubscribe`, unsubscribe);
 
     interval(1000)
       .pipe(takeUntil(unsubscribe))
@@ -28,13 +27,13 @@ const App = () => {
   }, [start]);
 
   const handleStart = () => {
-    start === true ? setStart(false) : setStart(true);
-    setStatus(1);
+    setStart(true);
   };
 
   const handleResume = () => {
     setTimeout(() => {
       handleStart();
+      setStart(false);
     }, 300);
   };
 
@@ -43,20 +42,17 @@ const App = () => {
       setStart(false);
       setTime(0);
     }
-    setStatus(0);
   };
 
   const handleReset = () => {
     setTime(0);
-    setStart(false);
-    setStatus(0);
+    setStart(true);
   };
 
   return (
     <div className="stopwatch">
       <Display time={time} />
       <Btn
-        status={status}
         handleStart={handleStart}
         handleReset={handleReset}
         handleResume={handleResume}
